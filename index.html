@@ -1,40 +1,100 @@
-</style>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voltéala</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            overflow: hidden;
+            flex-direction: column;
+            position: relative;
+        }
+        .titulo {
+            font-size: 48px;
+            color: white;
+            opacity: 0;
+            transition: opacity 20s ease-in-out;
+            margin-bottom: 50px;
+            position: absolute;
+            top: 20px;
+        }
+        .contenedor {
+            perspective: 1000px;
+            position: relative;
+        }
+        .imagen {
+            width: 788px;
+            height: 450px;
+            cursor: pointer;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .girada {
+            transform: rotateY(-180deg);
+        }
+        .boton {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: auto;
+            opacity: 0;
+            transition: opacity 2s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .boton:hover {
+            transform: translateX(-50%) scale(1.1);
+        }
+    </style>
 </head>
 <body>
-    <audio autoplay loop>
-        <source src="https://www.youtube.com/watch?v=ptwcZ574blo" type="audio/mpeg">
+    <audio autoplay loop volume="0.2"> <!-- Aquí ajustamos el volumen al 20% -->
+        <source src="https://github.com/IRONLORDXD/SquidIronGames.github.io/raw/refs/heads/main/04.Pink%20Soldiers.mp3" type="audio/mpeg">
         Tu navegador no soporta el elemento de audio.
     </audio>
-    <div class="titulo">VOLTEALA</div>
+    <div class="titulo" id="titulo">VOLTÉALA</div>
     <div class="contenedor">
-        <img src="https://i0.wp.com/www.escape-house.be/wp-content/uploads/2021/10/sixtyone-escapehouse.png?fit=1905%2C1143&quality=20&ssl=1" alt="Imagen" id="imagen" class="imagen" />
-        <a href="https://www.youtube.com/watch?v=1JhYYUWOBBs" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Userbox_creeper.svg/1200px-Userbox_creeper.svg.png" alt="Botón" id="boton" class="boton" />
+        <img src="https://raw.githubusercontent.com/IRONLORDXD/SquidIronGames.github.io/refs/heads/main/Squid%20Game%20card%20wallpaper.jpg" alt="Imagen" id="imagen" class="imagen" />
+        <a href="https://discord.gg/jbkHzaNVZU" target="_blank">
+            <img src="https://raw.githubusercontent.com/IRONLORDXD/SquidIronGames.github.io/refs/heads/main/logocalamar.png" alt="Botón" id="boton" class="boton" />
         </a>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            document.querySelector(".titulo").style.opacity = "1";
+            setTimeout(() => {
+                document.getElementById("titulo").style.opacity = "1";
+            }, 100);
         });
 
         document.getElementById("imagen").addEventListener("click", function () {
             if (!this.classList.contains("girada")) {
                 let imagen = this;
+                let titulo = document.getElementById("titulo");
+                let boton = document.getElementById("boton");
 
-                // Girar primero
+                // Iniciar el giro y cambiar la imagen a mitad de la animación
                 imagen.classList.add("girada");
-
-                // Esperar a que la animación termine para cambiar la imagen
                 setTimeout(() => {
-                    imagen.classList.add("oculta"); // Ocultar momentáneamente para evitar el parpadeo
-                    setTimeout(() => {
-                        imagen.src = "https://c8.alamy.com/compfr/2h0h39t/carte-de-visite-de-jeu-de-squid-et-motif-symbole-2h0h39t.jpg";
-                        imagen.classList.remove("oculta"); // Volver a mostrar con la nueva imagen
-                    }, 100);
-                    
-                    // Mostrar el botón
-                    document.getElementById("boton").style.display = "block";
-                }, 600); // Mismo tiempo que la animación de giro
+                    imagen.src = "https://raw.githubusercontent.com/IRONLORDXD/SquidIronGames.github.io/refs/heads/main/cartadetrasvolteada.png";
+                }, 300); // A la mitad del giro
+
+                // Hacer desaparecer el título con un desvanecimiento rápido
+                setTimeout(() => {
+                    titulo.style.transition = "opacity 1s ease-out";
+                    titulo.style.opacity = "0";
+                }, 400);
+
+                // Hacer que el botón aparezca gradualmente después del giro
+                setTimeout(() => {
+                    boton.style.opacity = "1";
+                }, 700); // Después de la transición de la imagen
             }
         });
     </script>
