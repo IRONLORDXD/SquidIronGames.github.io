@@ -1,41 +1,41 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voltéala</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: black;
-            overflow: hidden;
-            flex-direction: column;
-        }
-        .titulo {
-            font-size: 48px;
-            color: white;
-            opacity: 0;
-            transition: opacity 20s ease-in;
-            margin-bottom: 50px;
-        }
-        .contenedor img {
-            width: 528px;
-            height: 312px;
-        }
-    </style>
+</style>
 </head>
 <body>
+    <audio autoplay loop>
+        <source src="https://www.youtube.com/watch?v=ptwcZ574blo" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
     <div class="titulo">VOLTEALA</div>
     <div class="contenedor">
-        <img src="https://i0.wp.com/www.escape-house.be/wp-content/uploads/2021/10/sixtyone-escapehouse.png?fit=1905%2C1143&quality=20&ssl=1" alt="Imagen" />
+        <img src="https://i0.wp.com/www.escape-house.be/wp-content/uploads/2021/10/sixtyone-escapehouse.png?fit=1905%2C1143&quality=20&ssl=1" alt="Imagen" id="imagen" class="imagen" />
+        <a href="https://www.youtube.com/watch?v=1JhYYUWOBBs" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Userbox_creeper.svg/1200px-Userbox_creeper.svg.png" alt="Botón" id="boton" class="boton" />
+        </a>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelector(".titulo").style.opacity = "1";
+        });
+
+        document.getElementById("imagen").addEventListener("click", function () {
+            if (!this.classList.contains("girada")) {
+                let imagen = this;
+
+                // Girar primero
+                imagen.classList.add("girada");
+
+                // Esperar a que la animación termine para cambiar la imagen
+                setTimeout(() => {
+                    imagen.classList.add("oculta"); // Ocultar momentáneamente para evitar el parpadeo
+                    setTimeout(() => {
+                        imagen.src = "https://c8.alamy.com/compfr/2h0h39t/carte-de-visite-de-jeu-de-squid-et-motif-symbole-2h0h39t.jpg";
+                        imagen.classList.remove("oculta"); // Volver a mostrar con la nueva imagen
+                    }, 100);
+                    
+                    // Mostrar el botón
+                    document.getElementById("boton").style.display = "block";
+                }, 600); // Mismo tiempo que la animación de giro
+            }
         });
     </script>
 </body>
